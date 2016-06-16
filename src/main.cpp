@@ -59,9 +59,9 @@ int parseInput(int argc, char *argv[], string &filename){
 }
 
 int main(int argc, char *argv[]){
-  string filename;
-  if(!parseInput(argc - 1, argv, filename))
-    return 0;
+    string filename;
+    if(!parseInput(argc - 1, argv, filename))
+        return 0;
   
 	Mat image = imread(filename.c_str());
 	
@@ -70,28 +70,25 @@ int main(int argc, char *argv[]){
 	 */
 	vector<cv::Rect_<int> >* rects = pedDetector(image);
 
-	/*
-	 * OpenCV Output
-	 */
-	/*/
 	namedWindow("Teste", CV_WINDOW_NORMAL);
-	vector<cv::Rect_<int> >::iterator it;
-	for(it = rects->begin(); it != rects->end(); it++)
+    vector<cv::Rect_<int> >::iterator it;
+    for(it = rects->begin(); it != rects->end(); it++){
 		rectangle(image, *it, Scalar_<int>(255,0,0));
+    }
 	imshow("Teste", image);
 	waitKey(0);
-  //*/
+
   
 	/*
 	 * File Output
 	 */
-  string resultTXT = filename.substr(0,filename.length()-1-3) + ".txt";
+    string resultTXT = filename.substr(0,filename.length()-1-3) + ".txt";
 	ofstream myfile;
 	myfile.open(resultTXT.c_str());
-  myfile << "Each line of this file is of the type:" << endl 
+    myfile << "Each line of this file is of the type:" << endl
          << "ID : X, Y, Height, Width" << endl;
   
-	vector<cv::Rect_<int> >::iterator it;
+    //vector<cv::Rect_<int> >::iterator it;
 	int detection = 0;
 	for(it = rects->begin(); it != rects->end(); it++, detection++){
 	  myfile << detection << " : " << it->x << ", " << it->y << ", " << 

@@ -1,10 +1,11 @@
+cmake_minimum_required(VERSION 2.8)
 # Copyright: TODO
 # Authors: Fabio Reis, Matteo Taiana
 # CopyPolicy: Licensed under the Simplified BSD License
 
 file(GLOB folder_source *.cpp)
 file(GLOB folder_header ../include/*.hpp)
-
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -msse -msse2 -msse3")
 # Removing the ROS dependant files.
 if(NOT buildROS)
   file(GLOB ros_source *_ROS.cpp)
